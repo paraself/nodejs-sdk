@@ -52,7 +52,11 @@ class HttpClient extends EventEmitter {
             url: requestInfo.getUrl(),
             headers: requestInfo.headers,
             form: requestInfo.params,
-            timeout: HttpClient.DEFAULT_TIMEOUT
+            timeout: HttpClient.DEFAULT_TIMEOUT,
+            agent: false,
+            pool: {
+                maxSockets: 100
+            }
         };
 
         this.req(options);
@@ -64,7 +68,7 @@ class HttpClient extends EventEmitter {
     }
 }
 
-HttpClient.DEFAULT_TIMEOUT = 10000;
+HttpClient.DEFAULT_TIMEOUT = 30 * 1000;
 
 HttpClient.EVENT_DATA = 'data';
 
